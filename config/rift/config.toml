@@ -37,10 +37,10 @@ default_disable = false
 
 hot_reload = true
 
-# Side-by-side physical displays arranged vertically in macOS: crossing a
-# left/right edge enters the logical neighbor. Uncomment if that matches your
-# monitor arrangement.
-# horizontal_mouse_warp = "top-to-bottom"
+# Displays stacked vertically in macOS but physically side-by-side: treat the
+# upper display (the physically-left monitor) as logically left, so left/right
+# edge crossings enter the neighboring display at the same vertical offset.
+horizontal_mouse_warp = "top-to-bottom"
 
 # ─── Layout: niri-like scrolling strip ───
 [settings.layout]
@@ -54,7 +54,7 @@ min_column_width_ratio = 0.3
 max_column_width_ratio = 1.0
 preserve_window_sizes = true
 expand_single_column = true
-alignment = "right"
+alignment = "left"
 focus_navigation_style = "niri"
 
 [settings.layout.scrolling.gestures]
@@ -65,14 +65,14 @@ propagate_to_workspace_swipe = true      # overscroll past the strip switches wo
 
 # ─── Gaps (matches the old Paneru config: 8px outer + 8px inner) ───
 [settings.layout.gaps.outer]
-top = 8
-left = 8
-bottom = 8
-right = 8
+top = 10
+left = 10
+bottom = 10
+right = 10
 
 [settings.layout.gaps.inner]
-horizontal = 8
-vertical = 8
+horizontal = 10
+vertical = 10
 
 # ─── Virtual workspaces (rift uses a fixed count; there are no dynamic rows) ───
 [virtual_workspaces]

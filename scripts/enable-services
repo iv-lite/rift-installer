@@ -9,7 +9,14 @@ if ! command -v rift >/dev/null 2>&1; then
   exit 1
 fi
 
-rift service install
+# `rift service install` exits non-zero when the plist already exists, so only
+# install on first run (service label: git.acsandmann.rift).
+RIFT_PLIST="$HOME/Library/LaunchAgents/git.acsandmann.rift.plist"
+if [[ -f "$RIFT_PLIST" ]]; then
+  echo "    rift service already installed"
+else
+  rift service install
+fi
 
 if pgrep -x rift >/dev/null 2>&1; then
   rift service restart
