@@ -127,14 +127,16 @@ active_label = "index"
 "Meta + Alt + Tab" = "switch_to_last_workspace"
 
 # Displays — Cmd+Ctrl lane
-"Meta + Ctrl + Left" = { focus_display = "left" }
-"Meta + Ctrl + Right" = { focus_display = "right" }
-"Meta + Ctrl + Shift + Left" = { move_window_to_display = { selector = "left" } }
-"Meta + Ctrl + Shift + Right" = { move_window_to_display = { selector = "right" } }
+# Displays are stacked vertically in macOS (upper = physically-left monitor), so
+# direction-based commands use up/down: ← maps to up, → maps to down.
+"Meta + Ctrl + Left" = { focus_display = "up" }
+"Meta + Ctrl + Right" = { focus_display = "down" }
+"Meta + Ctrl + Shift + Left" = { move_window_to_display = { selector = "up" } }
+"Meta + Ctrl + Shift + Right" = { move_window_to_display = { selector = "down" } }
 # Send (stay) — rift's move_window_to_display has no follow/send toggle, so send
 # maps to the same move as above. Remove these two lines if you don't want that.
-"Meta + Ctrl + Alt + Left" = { move_window_to_display = { selector = "left" } }
-"Meta + Ctrl + Alt + Right" = { move_window_to_display = { selector = "right" } }
+"Meta + Ctrl + Alt + Left" = { move_window_to_display = { selector = "up" } }
+"Meta + Ctrl + Alt + Right" = { move_window_to_display = { selector = "down" } }
 # Warp the mouse to the display above/below (Paneru: Cmd+Ctrl+Up/Down).
 "Meta + Ctrl + Up" = { move_mouse_to_display = "up" }
 "Meta + Ctrl + Down" = { move_mouse_to_display = "down" }
