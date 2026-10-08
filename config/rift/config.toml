@@ -48,14 +48,14 @@ mode = "scrolling"
 window_insertion_point = "end_of_tree"   # append new windows at the end
 
 [settings.layout.scrolling]
-column_width_ratio = 0.7                 # niri default; neighbors peek in
-preset_column_widths = [0.3, 0.5, 1.0]   # cycled by Cmd+Alt+W / +Shift+W
+column_width_ratio = 0.85                # focused column fills most of the view
+preset_column_widths = [0.3, 0.5, 0.95]   # cycled by Cmd+Alt+W / +Shift+W
 min_column_width_ratio = 0.3
 max_column_width_ratio = 1.0
 preserve_window_sizes = true
 expand_single_column = true
 alignment = "left"
-focus_navigation_style = "niri"
+focus_navigation_style = "anchored"      # honor `alignment`; consistent edge placement
 
 [settings.layout.scrolling.gestures]
 enabled = true
