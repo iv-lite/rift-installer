@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# rift-wm-installer — uninstall. Stops the service, moves installed configs to
+# a timestamped backup, and optionally uninstalls the Homebrew formula.
+set -euo pipefail
+
+TS="$(date +%Y%m%d-%H%M%S)"
+BACKUP="$HOME/.config/backups/uninstall-$TS"
+mkdir -p "$BACKUP"
+
+echo "==> uninstall: stopping rift"
+if command -v rift >/dev/null 2>&1; then
+  rift service stop 2>/dev/null || true
+fi
+
+echo "==> uninstall: backing up configs to $BACKUP"
+for cfg in "$HOME/.config/rift" "$HOME/.config/ghostty" "$HOME/.config/zsh/antigen.zsh"; do
+  if [[ -e "$cfg" ]]; then
+    mv "$cfg" "$BACKUP/"
+    echo "    moved $cfg"
+  fi
+done
+
+# Remove the marked antigen block from ~/.zshrc.
+ZSHRC="$HOME/.zshrc"
+BEGIN="# >>> rift-wm-installer antigen >>>"
+END="# <<< rift-wm-installer antigen <<<"
+if [[ -f "$ZSHRC" ]]; then
+  sed -i '' "/^${BEGIN}$/,/^${END}$/d" "$ZSHRC"
+  echo "    removed antigen block from $ZSHRC"
+fi
+
+echo "==> uninstall: optional Homebrew removal"
+read -r -p "    Uninstall rift (brew)? [y/N] " ans || true
+if [[ "${ans:-}" =~ ^[Yy]$ ]]; then
+  brew uninstall rift 2>/dev/null || true
+  brew untap acsandmann/tap 2>/dev/null || true
+fi
+
+echo "    Ghostty and Antigen are left installed (remove manually if desired)."

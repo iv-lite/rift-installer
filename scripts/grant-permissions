@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Best-effort Accessibility guidance. Rift prompts on first launch, so this
+# only opens the pane and prints instructions — no programmatic TCC writes.
+set -euo pipefail
+
+echo "==> grant-permissions: Accessibility"
+echo "    Rift needs Accessibility access to move and focus windows."
+echo "    A launchd-launched rift usually does NOT show its own prompt, so grant"
+echo "    it manually:"
+echo "      System Settings → Privacy & Security → Accessibility"
+echo "    and enable the 'rift' binary. If it's missing, add it with the + button:"
+echo "      $(command -v rift 2>/dev/null || echo /opt/homebrew/bin/rift)"
+echo "    If 'rift' is already listed, make sure its toggle is ON."
+
+open "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility" 2>/dev/null || true

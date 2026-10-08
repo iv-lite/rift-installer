@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# rift-wm-installer — main entry point. Runs the per-component steps in order.
+# Re-running upgrades an existing setup (Homebrew components updated, configs
+# refreshed with *.bak kept, service restarted).
+set -euo pipefail
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+echo "==> rift-wm-installer"
+
+"$REPO_DIR/scripts/install-deps"
+"$REPO_DIR/scripts/configure-system"
+"$REPO_DIR/scripts/install-ghostty"
+"$REPO_DIR/scripts/install-antigen"
+"$REPO_DIR/scripts/install-rift"
+"$REPO_DIR/scripts/grant-permissions"
+"$REPO_DIR/scripts/enable-services"
+
+echo
+echo "==> Done."
+echo "    Log out and back in (Cmd+Shift+Q) to apply the separate-Spaces setting."
+echo "    Rift tiles in an niri-style scrolling strip; new windows are appended"
+echo "    at the end. If Accessibility access was not granted, enable the 'rift'"
+echo "    binary in System Settings → Privacy & Security → Accessibility, then run:"
+echo "      rift service restart"

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Install and start the rift background service.
+set -euo pipefail
+
+echo "==> enable-services: rift service"
+
+if ! command -v rift >/dev/null 2>&1; then
+  echo "    rift binary not found — run scripts/install-rift first" >&2
+  exit 1
+fi
+
+rift service install
+
+if pgrep -x rift >/dev/null 2>&1; then
+  rift service restart
+else
+  rift service start
+fi
+
+# Health check: the service can start while rift itself exits immediately
+# (e.g. "Displays have separate Spaces" disabled). `rift-cli query displays`
+# only succeeds when the daemon is reachable, so retry briefly.
+for _ in 1 2 3 4 5; do
+  if command -v rift-cli >/dev/null 2>&1 && rift-cli query displays >/dev/null 2>&1; then
+    echo "    rift service is running and reachable"
+    exit 0
+  fi
+  sleep 1
+done
+
+echo "    rift may have exited — check the error log:" >&2
+echo "      tail -n 100 \"/tmp/rift_$USER.err.log\"" >&2
+echo "    Common causes: separate-Spaces not applied (log out and back in), or" >&2
+echo "    Accessibility not granted to the 'rift' binary." >&2
+exit 1

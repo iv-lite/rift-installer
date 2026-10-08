@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Enable "Displays have separate Spaces" — rift exits at launch without it.
+set -euo pipefail
+
+echo "==> configure-system: enabling 'Displays have separate Spaces'"
+
+defaults write com.apple.spaces spans-displays -bool true
+
+mode="$(defaults read com.apple.spaces spans-displays 2>/dev/null || echo "0")"
+if [[ "$mode" == "1" ]]; then
+  echo "    separate Spaces enabled (mode 1)"
+else
+  echo "    warning: read back '$mode' — a log out/in may be required" >&2
+fi

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Install Rift (Homebrew) and write ~/.config/rift/config.toml.
+set -euo pipefail
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+echo "==> install-rift: installing Rift via Homebrew"
+brew install acsandmann/tap/rift
+
+echo "==> install-rift: writing ~/.config/rift/config.toml"
+mkdir -p "$HOME/.config/rift"
+if [[ -f "$HOME/.config/rift/config.toml" ]]; then
+  cp "$HOME/.config/rift/config.toml" "$HOME/.config/rift/config.toml.bak"
+fi
+cp "$REPO_DIR/config/rift/config.toml" "$HOME/.config/rift/config.toml"
+
+# Reload if the service is already running (hot-reload usually handles this,
+# but an explicit reload also validates the keymap/commands).
+if command -v rift-cli >/dev/null 2>&1; then
+  rift-cli execute config reload >/dev/null 2>&1 || true
+fi
+
+echo "    If windows don't tile, the current Space may be inactive — press Alt+Z"
+echo "    (or run: rift-cli execute space toggle-activated) to activate it."

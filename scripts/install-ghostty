@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Install Ghostty and write ~/.config/ghostty/config (frameless title bar).
+set -euo pipefail
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+echo "==> install-ghostty: installing Ghostty"
+brew install --cask ghostty
+
+echo "==> install-ghostty: writing ~/.config/ghostty/config"
+mkdir -p "$HOME/.config/ghostty"
+if [[ -f "$HOME/.config/ghostty/config" ]]; then
+  cp "$HOME/.config/ghostty/config" "$HOME/.config/ghostty/config.bak"
+fi
+cp "$REPO_DIR/config/ghostty/config" "$HOME/.config/ghostty/config"
