@@ -52,6 +52,8 @@ The installer runs these steps from `scripts/`:
 | Cmd + Ctrl + ↑ / ↓                     | Warp the mouse to the display above / below                         |
 | Cmd + Option + V                       | Toggle floating / tiled                                             |
 | Cmd + Option + O / + Shift + O         | Stack into the neighbour column / pull out of a stack               |
+| Cmd + Option + M                       | Maximize within the outer gaps                                      |
+| Cmd + Option + F                       | Fill the screen (fullscreen, ignores outer gaps)                    |
 | Cmd + Ctrl + T                         | Open / activate Ghostty                                             |
 | Cmd + Option + Shift + R               | Reload the rift config                                              |
 | Cmd + Option + Ctrl + Q                | Save and exit rift                                                  |

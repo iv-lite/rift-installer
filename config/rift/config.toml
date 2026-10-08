@@ -49,13 +49,13 @@ window_insertion_point = "end_of_tree"   # append new windows at the end
 
 [settings.layout.scrolling]
 column_width_ratio = 0.85                # focused column fills most of the view
-preset_column_widths = [0.3, 0.5, 0.95]   # cycled by Cmd+Alt+W / +Shift+W
+preset_column_widths = [0.3, 0.5, 1.0]   # cycled by Cmd+Alt+W / +Shift+W
 min_column_width_ratio = 0.3
 max_column_width_ratio = 1.0
 preserve_window_sizes = true
-expand_single_column = true
+expand_single_column = false
 alignment = "left"
-focus_navigation_style = "anchored"      # honor `alignment`; consistent edge placement
+focus_navigation_style = "niri"
 
 [settings.layout.scrolling.gestures]
 enabled = true
@@ -145,6 +145,9 @@ active_label = "index"
 "Meta + Alt + V" = "toggle_window_floating"
 "Meta + Alt + O" = "toggle_stack"
 "Meta + Alt + Shift + O" = "unjoin_windows"
+# Fill screen: M respects the outer gaps; F is raw fullscreen (ignores gaps).
+"Meta + Alt + M" = "toggle_fullscreen_within_gaps"
+"Meta + Alt + F" = "toggle_fullscreen"
 
 # Apps & misc
 # Cmd+Ctrl+T opens/activates Ghostty (rift exec runs a command per press; it does
@@ -154,5 +157,5 @@ active_label = "index"
 "Meta + Alt + Ctrl + Q" = "save_and_exit"
 
 # Dropped vs the old Paneru config (no rift scrolling equivalent):
-#   window fullwidth (Cmd+Alt+M)  -> preset cycle above reaches 1.0
+#   window fullwidth  -> preset cycle above reaches 1.0
 #   window balance / equalize / copyrule, fine-grained resize
