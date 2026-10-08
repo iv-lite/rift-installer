@@ -80,7 +80,7 @@ brew tap FelixKratz/formulae && brew install borders
 1. `rift-cli query displays` — JSON means the daemon is up; "cannot connect" means run `rift service restart`.
 2. `rift-cli execute space toggle-activated`, then open two windows — if tiling starts, the current Space was inactive. Press `Alt + Z` to toggle it from the keyboard.
 3. `tail -n 100 "/tmp/rift_$USER.err.log"` — check for config, permission, or macOS 27 errors.
-4. `defaults read com.apple.spaces spans-displays` — must print `1`; if not, enable "Displays have separate Spaces" and log out/in.
+4. `defaults read com.apple.spaces spans-displays` — must print `0`; if not, enable "Displays have separate Spaces" and log out/in.
 
 If a Space is stuck inactive after a reinstall, press `Alt + Z` (the bundled activation key is restored in this config). On macOS 27, if automatic activation misbehaves, set `default_disable = true` in `config/rift/config.toml` and activate each Space manually with `Alt + Z`.
 
